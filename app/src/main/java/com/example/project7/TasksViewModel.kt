@@ -24,6 +24,8 @@ class TasksViewModel : ViewModel() {
     private val _tasks: MutableLiveData<MutableList<Task>> = MutableLiveData()
     val tasks: LiveData<List<Task>>
         get() = _tasks as LiveData<List<Task>>
+
+    // callbacks for when we want to navigate to different screens
     private val _navigateToTask = MutableLiveData<String?>()
     val navigateToTask: LiveData<String?>
         get() = _navigateToTask
@@ -44,6 +46,7 @@ class TasksViewModel : ViewModel() {
     val navigateToSignIn: LiveData<Boolean>
         get() = _navigateToSignIn
 
+    // the actual database of notes
     private lateinit var tasksCollection: DatabaseReference
 
 
@@ -56,13 +59,15 @@ class TasksViewModel : ViewModel() {
     }
 
     fun initializeTheDatabaseReference() {
-
+        // get firebase database
         val database = Firebase.database
+        // "tasks" is our root node, whose children are our user id's
+        // each user id has children of the notes corresponding to that user
         tasksCollection = database
             .getReference("tasks")
             .child(auth.currentUser!!.uid)
 
-
+        // when we change a ntoe, make sure to update the tasks list
         tasksCollection.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 var tasksList: ArrayList<Task> = ArrayList()
@@ -88,6 +93,7 @@ class TasksViewModel : ViewModel() {
     }
 
     fun updateTask() {
+        // add new task or update an existing one if it already exists
         if (taskId.trim() == "") {
             tasksCollection.push().setValue(task.value)
         } else {

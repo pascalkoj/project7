@@ -32,7 +32,7 @@ class SignUpFragment : Fragment() {
         val viewModel : TasksViewModel by activityViewModels()
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
+        // nav to sign in
         viewModel.navigateToSignIn.observe(viewLifecycleOwner, Observer { navigate ->
             if (navigate) {
                 view.findNavController()

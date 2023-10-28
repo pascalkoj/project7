@@ -38,6 +38,7 @@ class SplashFragment : Fragment() {
         val currentUser = viewModel.getCurrentUser()
 
         val handler = Handler(Looper.myLooper()!!)
+        // show splash screen for 2 seconds, then go to the main fragment if we're already signed in, or sign in fragment otherwise
         handler.postDelayed({
             if (currentUser != null) {
                 viewModel.initializeTheDatabaseReference()

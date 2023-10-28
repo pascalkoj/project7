@@ -29,37 +29,22 @@ class TasksFragment : Fragment()   {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-       /* val adapter = TaskItemAdapter{ taskId ->
-            viewModel.onTaskClicked(taskId)
-
-        }*/
-
         fun taskClicked (task : Task) {
+            // notify viewmodel we've clicked a task
             viewModel.onTaskClicked(task)
         }
-        /*
-        fun yesPressed(taskId : String) {
-            Log.d(TAG, "in yesPressed(): taskId = $taskId")
-            //TODO: delete the task with id = taskId
-            binding.viewModel?.deleteTask(taskId)
-        }
-        fun deleteClicked (taskId : String) {
-             //ConfirmDeleteDialogFragment(taskId,::yesPressed).show(childFragmentManager,
-             //    ConfirmDeleteDialogFragment.TAG)
-        }
-        */
-
+        // no delete callback since we're deleting from within the notes themselves
         val adapter = TaskItemAdapter(::taskClicked) {}
-
 
         binding.tasksList.adapter = adapter
 
+        // update recyclerview
         viewModel.tasks.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }
         })
-
+        // edit this note
         viewModel.navigateToTask.observe(viewLifecycleOwner, Observer { taskId ->
             taskId?.let {
                 val action = TasksFragmentDirections
@@ -68,6 +53,7 @@ class TasksFragment : Fragment()   {
                 viewModel.onTaskNavigated()
             }
         })
+        // go to sign in page
         viewModel.navigateToSignIn.observe(viewLifecycleOwner, Observer { navigate ->
             if(navigate) {
                 this.findNavController().navigate(R.id.action_tasksFragment_to_signInFragment)

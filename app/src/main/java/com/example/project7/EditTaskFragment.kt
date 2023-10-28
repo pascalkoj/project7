@@ -23,6 +23,7 @@ class EditTaskFragment : Fragment() {
     private var _binding: FragmentEditTaskBinding? = null
     private val binding get() = _binding!!
 
+    // navigates to the main notes fragment and notifies the viewmodel
     fun NavigateToTasksFragment(view: View, viewModel: TasksViewModel)
     {
         view.findNavController()
@@ -33,18 +34,20 @@ class EditTaskFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         _binding = FragmentEditTaskBinding.inflate(inflater, container, false)
+        // initialize viewmodel and bindings
         val view = binding.root
         val taskId = EditTaskFragmentArgs.fromBundle(requireArguments()).taskId
-
         val viewModel : TasksViewModel by activityViewModels()
         viewModel.taskId = taskId
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        // when the viewmodel wants to move to the list, navigate to our main notes fragment
         viewModel.navigateToList.observe(viewLifecycleOwner, Observer { navigate ->
             if (navigate) {
                 NavigateToTasksFragment(view, viewModel)
             }
         })
+        // when user wants to delete a note, delete it from the viewmodel and navigate off the note editing fragment
         fun yesPressed(taskId : String) {
             viewModel.deleteTask(taskId)
             NavigateToTasksFragment(view, viewModel)

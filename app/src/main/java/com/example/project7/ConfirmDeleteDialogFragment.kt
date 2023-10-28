@@ -13,6 +13,7 @@ class ConfirmDeleteDialogFragment(val taskId : String,val clickListener: (taskId
     }
 
     var listener: myClickListener? = null
+    // prompt user before actually deleting notes
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext())
             .setMessage(getString(R.string.delete_confirmation))

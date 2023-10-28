@@ -30,6 +30,7 @@ class TaskItemAdapter(val clickListener: (task: Task) -> Unit,
                  deleteClickListener: (taskId: String) -> Unit) {
             binding.task = item
             binding.root.setOnClickListener { clickListener(item) }
+            // don't need delete button on the recyclerview components
             //binding.deleteButton.setOnClickListener { deleteClickListener(item.taskId!!) }
         }
     }
