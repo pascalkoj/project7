@@ -47,9 +47,19 @@ class SignInFragment : Fragment() {
         })
         viewModel.errorHappened.observe(viewLifecycleOwner, Observer { error ->
             error?.let {
-                Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, error, Toast.LENGTH_LONG).show()
             }
         })
+        viewModel.navigateToSignIn.observe(viewLifecycleOwner) {
+            binding.emailEt.setText(viewModel.user.email)
+            binding.passEt.setText(viewModel.user.password)
+        }
+
+        if (viewModel.user.email.isNotBlank() && viewModel.user.password.isNotBlank()) {
+            binding.emailEt.setText(viewModel.user.email)
+            binding.passEt.setText(viewModel.user.password)
+        }
+
         return view
     }
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".SignInFragment">
     <data>
@@ -9,7 +10,6 @@
             type="com.example.project7.TasksViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -129,12 +129,12 @@
                 android:id="@+id/passEt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="15dp"
                 android:background="@color/white"
                 android:hint="@string/enter_your_pass"
                 android:inputType="textPassword"
-                android:text="@={viewModel.user.password}"
-                android:paddingStart="12dp" />
+                android:paddingStart="12dp"
+                android:paddingTop="15dp"
+                android:text="@={viewModel.user.password}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -154,6 +154,21 @@
         app:layout_constraintTop_toBottomOf="@id/cardView2"
         android:contentDescription="Click to sign in"/>
 
+
+    <Button
+        android:id="@+id/bSignOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.signOut()}"
+        android:background="#00FFFFFF"
+        android:text="Sign Out"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_logout"
+        app:iconTint="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
     <TextView
         android:id="@+id/textview32"

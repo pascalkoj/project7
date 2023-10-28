@@ -1,4 +1,5 @@
 package com.example.project7
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -135,6 +136,11 @@ class TasksViewModel : ViewModel() {
         _navigateToSignIn.value = false
     }
 
+    fun navigateToProfile()
+    {
+        navigateToSignIn()
+    }
+
     fun signIn() {
         if (user.email.isEmpty() || user.password.isEmpty()) {
             _errorHappened.value = "Email and password cannot be empty."
@@ -170,6 +176,7 @@ class TasksViewModel : ViewModel() {
 
     fun signOut() {
         auth.signOut()
+        user = User()
         _navigateToSignIn.value = true
     }
 

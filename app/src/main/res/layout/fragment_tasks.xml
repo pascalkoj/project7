@@ -56,7 +56,7 @@
                     android:layout_weight="0.1"
                     android:background="#00FFFFFF"
                     android:gravity="end"
-                    android:onClick="@{() -> viewModel.navigateToSignIn()}"
+                    android:onClick="@{() -> viewModel.navigateToProfile()}"
                     app:icon="@drawable/ic_person"
                     app:iconSize="30dp"
                     app:iconTint="#000000" />
