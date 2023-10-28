@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".TasksFragment">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.project7.TasksViewModel" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#BA85FB">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00A04CFF"
+                android:backgroundTint="#00FFFFFF"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textNotesToolbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="20"
+                    android:text="Notes"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30dp" />
+
+                <Button
+                    android:id="@+id/save_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="#00FFFFFF"
+                    android:gravity="start"
+                    android:onClick="@{() -> viewModel.onNewTaskClicked()}"
+                    app:icon="@drawable/ic_add_note"
+                    app:iconSize="30dp"
+                    app:iconTint="#000000" />
+
+                <Button
+                    android:id="@+id/signout_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="#00FFFFFF"
+                    android:gravity="end"
+                    android:onClick="@{() -> viewModel.navigateToSignIn()}"
+                    app:icon="@drawable/ic_person"
+                    app:iconSize="30dp"
+                    app:iconTint="#000000" />
+
+            </LinearLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tasks_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="top"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            />
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".EditTaskFragment">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.project7.TasksViewModel" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/task_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter a note title"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:text="@={viewModel.task.taskName}"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/task_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Note content here..."
+            android:inputType="text|textLongMessage|textMultiLine"
+            android:minHeight="48dp"
+            android:text="@={viewModel.task.taskContent}"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/update_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="@{() -> viewModel.updateTask()}"
+                android:text="Save Note" />
+
+            <Button
+                android:id="@+id/bDeleteTask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete Note" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
